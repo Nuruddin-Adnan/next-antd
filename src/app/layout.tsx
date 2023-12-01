@@ -1,8 +1,12 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Lato } from 'next/font/google'
 import './globals.css'
+import StyledComponentsRegistry from '@/lib/AntdRegistry'
 
-const inter = Inter({ subsets: ['latin'] })
+import { ConfigProvider } from 'antd';
+import theme from '@/theme/themeConfig'
+
+const lato = Lato({ subsets: ['latin'], weight: ["400", "700"] })
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -16,7 +20,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={lato.className}>
+        <StyledComponentsRegistry>
+          <ConfigProvider theme={theme}>
+            {children}
+          </ConfigProvider>
+        </StyledComponentsRegistry>
+      </body>
     </html>
   )
 }
